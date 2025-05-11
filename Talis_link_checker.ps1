@@ -44,11 +44,6 @@ function Test-Url {
                 }
             }
 
-            if ($response.StatusCode -eq 404) {
-                return $response.StatusCode
-            } elseif ($response.StatusCode -eq 418) {
-                return "I'm a teapot"
-            }
         } catch {
             if ($_.Exception.Response.StatusCode -eq 404) {
                 return $_.Exception.Response.StatusCode
