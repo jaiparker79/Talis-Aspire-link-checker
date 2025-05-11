@@ -5,7 +5,7 @@ function Test-Url {
         [string]$url
     )
 
-    # Check for specific URL patterns first
+    # Check for specific URL patterns first.  The ones listed below are QUT-specific, please edit these for your own libraries needs.
     if ($url -match "^https://web\.p\.ebscohost\.com") {
         return "EBSCOhost"
     } elseif ($url -match "^https://www\.clickview\.net") {
@@ -52,6 +52,7 @@ function Test-Url {
         } catch {
             if ($_.Exception.Response.StatusCode -eq 404) {
                 return $_.Exception.Response.StatusCode
+		# these elseif statements which attempt to catch inner exceptions are not working at present. Attempting to work out if PowerShell's Invoke-WebRequest can even do this. Jai 11-05-2025
             } elseif ($_.Exception.InnerException -match "The remote name could not be resolved") {
                 return "DNS Lookup Failed"
             } elseif ($_.Exception.InnerException -match "The operation has timed out") {
