@@ -91,7 +91,7 @@ if ($csvFiles.Length -eq 0) {
 }
 
     Write-Host "#################################" -ForegroundColor DarkYellow
-    Write-Host "QUT Readings link checking script (beta)" -ForegroundColor DarkYellow
+    Write-Host "Talis Aspire link checking script (beta)" -ForegroundColor DarkYellow
     Write-Host "#################################" -ForegroundColor DarkYellow
     Write-Host ""  # Blank line
 
