@@ -47,12 +47,12 @@ function Test-Url {
         } catch {
             if ($_.Exception.Response.StatusCode -eq 404) {
                 return $_.Exception.Response.StatusCode
-		# these elseif statements which attempt to catch inner exceptions are not working at present. Attempting to work out if PowerShell's Invoke-WebRequest can even do this. Jai 11-05-2025
-            } elseif ($_.Exception.InnerException -match "The remote name could not be resolved") {
+                # these elseif statements which attempt to catch inner exceptions are not working at present. Attempting to work out if PowerShell's Invoke-WebRequest can even do this. Jai 11-05-2025
+            } elseif ($_.Exception -match "The remote name could not be resolved") {
                 return "DNS Lookup Failed"
-            } elseif ($_.Exception.InnerException -match "The operation has timed out") {
+            } elseif ($_.Exception -match "The operation has timed out") {
                 return "Timeout"
-            } elseif ($_.Exception.InnerException -match "The underlying connection was closed") {
+            } elseif ($_.Exception -match "The underlying connection was closed") {
                 return "Connection Closed"
             } else {
                 $errorCode = $null
@@ -73,7 +73,7 @@ function Show-Menu {
     for ($i = 0; $i -lt $files.Length; $i++) {
         Write-Host "$($i + 1). $($files[$i].Name)"
     }
-	    Write-Host ""  # Blank line
+            Write-Host ""  # Blank line
     $selection = Read-Host "Enter the number of the file you want to check"
     return $files[$selection - 1]
 }
