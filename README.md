@@ -3,7 +3,7 @@
 This PowerShell script checks URLs and DOIs exported in CSV format from the
 Talis Aspire Reading List system.  It was made by Jai Parker, Information
 Access Librarian at the Queensland University of Technology with help from
-Microsoft Copilot.  As per the GPL license, caveat emptor.
+Microsoft Copilot.  As per the [license](./LICENSE), caveat emptor.
 
 To run this script:
 
