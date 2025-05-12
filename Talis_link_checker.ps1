@@ -46,8 +46,10 @@ function Test-Url {
                 }
             }
 
-            # Check for 404 Not Found and to see if remote server is a teapot
+            # Check for 404 Not Found, 400 Bad Request and to see if remote server is a teapot
             if ($response.StatusCode -eq 404) {
+                return $response.StatusCode
+            } elseif ($response.StatusCode -eq 400) {
                 return $response.StatusCode
             } elseif ($response.StatusCode -eq 418) {
                 return "I'm a teapot"
