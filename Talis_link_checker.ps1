@@ -28,6 +28,8 @@ function Test-Url {
         return "Factiva"
     } elseif ($url -match "eu1\.proxy\.openathens\.net") {
         return "OpenAthens Proxied"
+    } elseif ($url -match "c=UERG") {
+        return "Ebook Central PDF"
     }
 
     $maxRetries = 1
