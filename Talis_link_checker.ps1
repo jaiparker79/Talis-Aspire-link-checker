@@ -5,7 +5,7 @@ function Test-Url {
         [string]$url
     )
 
-    # Check for specific URL patterns first.  The ones listed below are QUT-specific, please edit these for your own libraries needs.
+    # Check for specific URL patterns first. The ones listed below are QUT-specific, please edit these for your own libraries needs.
     if ($url -match "^https://web\.p\.ebscohost\.com") {
         return "EBSCOhost"
     } elseif ($url -match "^https://www\.clickview\.net") {
@@ -26,6 +26,8 @@ function Test-Url {
         return "Ovid"
     } elseif ($url -match "^https://global-factiva-com\.eu1\.proxy\.openathens\.net") {
         return "Factiva"
+    } elseif ($url -match "eu1\.proxy\.openathens\.net") {
+        return "OpenAthens Proxied"
     }
 
     $maxRetries = 1
@@ -43,25 +45,26 @@ function Test-Url {
                     return "$response.StatusCode - Redirected to domain"
                 }
             }
-	    
-	    #Check for 404 Not Found and to see if remote server is a teapot
+
+            # Check for 404 Not Found and to see if remote server is a teapot
             if ($response.StatusCode -eq 404) {
                 return $response.StatusCode
             } elseif ($response.StatusCode -eq 418) {
                 return "I'm a teapot"
+            } elseif ($response.StatusCode -ge 500 -and $response.StatusCode -lt 600) {
+                return "Server Error $($response.StatusCode)"
             }
-	    
-	    #catch does double-check for 404 and finds non existent sites
         } catch {
             if ($_.Exception.Response.StatusCode -eq 404) {
                 return $_.Exception.Response.StatusCode
-		# these elseif statements which attempt to catch inner exceptions are not working at present. Attempting to work out if PowerShell's Invoke-WebRequest can even do this. Jai 11-05-2025
             } elseif ($_.Exception -match "The remote name could not be resolved") {
                 return "DNS Lookup Failed"
             } elseif ($_.Exception -match "The operation has timed out") {
                 return "Timeout"
             } elseif ($_.Exception -match "The underlying connection was closed") {
                 return "Connection Closed"
+            } elseif ($_.Exception -match "NXDOMAIN") {
+                return "NXDOMAIN Error"
             } else {
                 $errorCode = $null
             }
@@ -81,7 +84,7 @@ function Show-Menu {
     for ($i = 0; $i -lt $files.Length; $i++) {
         Write-Host "$($i + 1). $($files[$i].Name)"
     }
-	    Write-Host ""  # Blank line
+    Write-Host ""  # Blank line
     $selection = Read-Host "Enter the number of the file you want to check"
     return $files[$selection - 1]
 }
@@ -94,10 +97,10 @@ if ($csvFiles.Length -eq 0) {
     exit
 }
 
-    Write-Host "#################################" -ForegroundColor DarkYellow
-    Write-Host "Talis Aspire link checking script (beta)" -ForegroundColor DarkYellow
-    Write-Host "#################################" -ForegroundColor DarkYellow
-    Write-Host ""  # Blank line
+Write-Host "#################################" -ForegroundColor DarkYellow
+Write-Host "Talis Aspire link checking script (beta)" -ForegroundColor DarkYellow
+Write-Host "#################################" -ForegroundColor DarkYellow
+Write-Host ""  # Blank line
 
 # Show menu and get user selection
 $inputFilename = Show-Menu -files $csvFiles
@@ -133,6 +136,7 @@ try {
                         $output += [pscustomobject]@{
                             "Item Link"      = $row."Item Link"
                             "HTTP Error Code" = $errorCode
+                            "Broken URL"      = $url
                         }
                         Write-Host ""  # Blank line
                         break
@@ -159,3 +163,4 @@ try {
 # Keep the PowerShell window open
 Read-Host -Prompt "Press Enter to exit"
 # End QUT Readings link checking script
+
