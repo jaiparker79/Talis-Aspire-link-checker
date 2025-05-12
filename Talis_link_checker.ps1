@@ -43,7 +43,15 @@ function Test-Url {
                     return "$response.StatusCode - Redirected to domain"
                 }
             }
-
+	    
+	    #Check for 404 Not Found and to see if remote server is a teapot
+            if ($response.StatusCode -eq 404) {
+                return $response.StatusCode
+            } elseif ($response.StatusCode -eq 418) {
+                return "I'm a teapot"
+            }
+	    
+	    #catch does double-check for 404 and finds non existent sites
         } catch {
             if ($_.Exception.Response.StatusCode -eq 404) {
                 return $_.Exception.Response.StatusCode
