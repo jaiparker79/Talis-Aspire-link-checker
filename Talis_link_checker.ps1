@@ -7,25 +7,25 @@ function Test-Url {
 
     # Check for specific URL patterns first. The ones listed below are QUT-specific, please edit these for your own libraries needs.
     if ($url -match "^https://web\.p\.ebscohost\.com") {
-        return "EBSCOhost"
+        return "EBSCOhost, see https://www.library.qut.edu.au/search/status/linking/#other"
     } elseif ($url -match "^https://www\.clickview\.net") {
-        return "ClickView"
+        return "ClickView, see https://www.library.qut.edu.au/search/status/linking/#other"
     } elseif ($url -match "^https://edu\.digitaltheatreplus\.com") {
-        return "Digital Theatre+"
+        return "Digital Theatre+, see https://www.library.qut.edu.au/search/status/linking/digitaltheatre/"
     } elseif ($url -match "^https://learning\.oreilly\.com") {
-        return "O'Reilly"
+        return "O'Reilly, see https://www.library.qut.edu.au/search/status/linking/oreilly/"
     } elseif ($url -match "^https://viewer\.books24x7\.com") {
-        return "Skillsoft"
+        return "Skillsoft, see https://www.library.qut.edu.au/search/status/linking/skillsoft/"
     } elseif ($url -match "^https://anzlaw\.thomsonreuters\.com") {
-        return "Westlaw Australia"
+        return "Westlaw Australia, see https://www.library.qut.edu.au/search/status/linking/westlaw/"
     } elseif ($url -match "^https://1\.next\.westlaw\.com") {
-        return "Westlaw International"
+        return "Westlaw International, see https://www.library.qut.edu.au/search/status/linking/westlaw/"
     } elseif ($url -match "^https://uk\.westlaw\.com") {
-        return "Westlaw UK"
+        return "Westlaw UK, see https://www.library.qut.edu.au/search/status/linking/westlaw/"
     } elseif ($url -match "^https://ovidsp\.[a-z0-9]+\.ovid\.com") {
-        return "Ovid"
+        return "Ovid. Check metadata has valid DOI and switch linking to OpenURL"
     } elseif ($url -match "^https://global-factiva-com\.eu1\.proxy\.openathens\.net") {
-        return "Factiva"
+        return "Factiva, see https://www.library.qut.edu.au/search/status/linking/factiva/"
     } elseif ($url -match "eu1\.proxy\.openathens\.net") {
         return "OpenAthens Proxied"
     } elseif ($url -match "ezp01\.library\.qut\.edu\.au") {
