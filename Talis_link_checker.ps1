@@ -28,7 +28,11 @@ function Test-Url {
         return "Factiva"
     } elseif ($url -match "eu1\.proxy\.openathens\.net") {
         return "OpenAthens Proxied"
-    } elseif ($url -match "c=UERG") {
+    } elseif ($url -match "ez01\.library\.qut\.edu\.au") {
+        return "EZproxy"
+    } elseif ($url -match "gateway\.library\.qut\.edu\.au") {
+        return "EZproxy"
+    }elseif ($url -match "c=UERG") {
         return "Ebook Central PDF"
     }
 
