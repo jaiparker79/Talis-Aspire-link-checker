@@ -32,7 +32,7 @@ function Test-Url {
         return "EZproxy"
     } elseif ($url -match "gateway\.library\.qut\.edu\.au") {
         return "EZproxy"
-    }elseif ($url -match "c=UERG") {
+    } elseif ($url -match "c=UERG") {
         return "Ebook Central PDF"
     }
 
