@@ -6,7 +6,7 @@ function Test-Url {
     )
 
     # Check for specific URL patterns first. The ones listed below are QUT-specific, please edit these for your own libraries needs.
-    if ($url -match "^https://web\.p\.ebscohost\.com") {
+    if ($url -match "^https://web\.[a-z0-9]+\.ebscohost\.com") {
         return "EBSCOhost, see https://www.library.qut.edu.au/search/status/linking/#other"
     } elseif ($url -match "^https://www\.clickview\.net") {
         return "ClickView, see https://www.library.qut.edu.au/search/status/linking/#other"
