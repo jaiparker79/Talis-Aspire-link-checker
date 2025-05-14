@@ -105,9 +105,9 @@ if ($csvFiles.Length -eq 0) {
     exit
 }
 
-Write-Host "#################################" -ForegroundColor DarkYellow
-Write-Host "Talis Aspire link checking script (beta)" -ForegroundColor DarkYellow
-Write-Host "#################################" -ForegroundColor DarkYellow
+Write-Host "###############################################" -ForegroundColor DarkYellow
+Write-Host "Talis Aspire link checking script (Version 1.0)" -ForegroundColor DarkYellow
+Write-Host "###############################################" -ForegroundColor DarkYellow
 Write-Host ""  # Blank line
 
 # Show menu and get user selection
