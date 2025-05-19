@@ -28,7 +28,9 @@ function Test-Url {
         return "Ovid. Check metadata has valid DOI and switch linking to OpenURL"
     } elseif ($url -match "^https://global-factiva-com\.eu1\.proxy\.openathens\.net") {
         return "https://www.library.qut.edu.au/search/status/linking/factiva/"
-    } elseif ($url -match "eu1\.proxy\.openathens\.net") {
+    } elseif ($url -match "^https://qut\.eblib\.com\.au") {
+        return "EBL. Change URL to Ebook Central"
+    }  elseif ($url -match "eu1\.proxy\.openathens\.net") {
         return "OpenAthens Proxied"
     } elseif ($url -match "ezp01\.library\.qut\.edu\.au") {
         return "EZproxy"
