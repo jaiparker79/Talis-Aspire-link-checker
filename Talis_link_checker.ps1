@@ -130,8 +130,8 @@ try {
             $lineCount++
             Write-Host "Processing line $lineCount"
 
-            # Check URLs in columns AL and O
-            $columns = @("Online Resource Web Address", "DOI")
+            # Check URLs in columns X and O
+            $columns = @("Web Address", "DOI")
             foreach ($column in $columns) {
                 $url = $row.$column
                 if ($url) {
@@ -142,7 +142,7 @@ try {
                     Write-Host "Checking URL: $url"
                     $errorCode = Test-Url -url $url
                     if ($errorCode -and $errorCode -ne $null) {
-                        Write-Host "Broken link detected: $url - Status Code: $errorCode" -ForegroundColor Red
+                        Write-Host "Errant link detected: $url - Status Code: $errorCode" -ForegroundColor Red
                         $output += [pscustomobject]@{
                             "Item Link"      = $row."Item Link"
                             "HTTP Error Code" = $errorCode
