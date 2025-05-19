@@ -40,7 +40,7 @@ broken. This can and should be customised for your specific needs.
 Otherwise, for every URL in the list, the script will flag it as broken if:
 
 * the hostname in the URL cannot be resolved (i.e. DNS error)
-* a connection timeout occurs (by default this is 30 seconds)
+* a connection timeout occurs (by default this is 90 seconds)
 * the connection terminates incorrectly
 * the webserver returns a "400 Bad Request" response
 * the webserver returns a "404 Not Found" response
