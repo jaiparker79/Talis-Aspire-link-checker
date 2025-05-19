@@ -9,25 +9,25 @@ function Test-Url {
     if ($url -match "^https://web\.[a-z0-9]+\.ebscohost\.com") {
         return "EBSCOhost, see https://www.library.qut.edu.au/search/status/linking/#other"
     } elseif ($url -match "^https://www\.clickview\.net/videos/") {
-        return "ClickView, see https://www.library.qut.edu.au/search/status/linking/#other"
+        return "https://www.library.qut.edu.au/search/status/linking/#other"
     } elseif ($url -match "^https://launch\.clickview\.net") {
-        return "ClickView, see https://www.library.qut.edu.au/search/status/linking/#other"
+        return "https://www.library.qut.edu.au/search/status/linking/#other"
     } elseif ($url -match "^https://edu\.digitaltheatreplus\.com") {
-        return "Digital Theatre+, see https://www.library.qut.edu.au/search/status/linking/digitaltheatre/"
+        return "https://www.library.qut.edu.au/search/status/linking/digitaltheatre/"
     } elseif ($url -match "^https://learning\.oreilly\.com") {
-        return "O'Reilly, see https://www.library.qut.edu.au/search/status/linking/oreilly/"
+        return "https://www.library.qut.edu.au/search/status/linking/oreilly/"
     } elseif ($url -match "^https://viewer\.books24x7\.com") {
-        return "Skillsoft, see https://www.library.qut.edu.au/search/status/linking/skillsoft/"
+        return "https://www.library.qut.edu.au/search/status/linking/skillsoft/"
     } elseif ($url -match "^https://anzlaw\.thomsonreuters\.com") {
-        return "Westlaw Australia, see https://www.library.qut.edu.au/search/status/linking/westlaw/"
+        return "https://www.library.qut.edu.au/search/status/linking/westlaw/"
     } elseif ($url -match "^https://1\.next\.westlaw\.com") {
-        return "Westlaw International, see https://www.library.qut.edu.au/search/status/linking/westlaw/"
+        return "https://www.library.qut.edu.au/search/status/linking/westlaw/"
     } elseif ($url -match "^https://uk\.westlaw\.com") {
-        return "Westlaw UK, see https://www.library.qut.edu.au/search/status/linking/westlaw/"
+        return "https://www.library.qut.edu.au/search/status/linking/westlaw/"
     } elseif ($url -match "^https://ovidsp\.[a-z0-9]+\.ovid\.com") {
         return "Ovid. Check metadata has valid DOI and switch linking to OpenURL"
     } elseif ($url -match "^https://global-factiva-com\.eu1\.proxy\.openathens\.net") {
-        return "Factiva, see https://www.library.qut.edu.au/search/status/linking/factiva/"
+        return "https://www.library.qut.edu.au/search/status/linking/factiva/"
     } elseif ($url -match "eu1\.proxy\.openathens\.net") {
         return "OpenAthens Proxied"
     } elseif ($url -match "ezp01\.library\.qut\.edu\.au") {
@@ -38,7 +38,7 @@ function Test-Url {
         return "Ebook Central PDF"
     }
 
-    $maxRetries = 1
+    $maxRetries = 2
     $retryCount = 0
     $errorCode = $null
 
@@ -80,7 +80,7 @@ function Test-Url {
             }
         }
         $retryCount++
-        Start-Sleep -Seconds 5
+        Start-Sleep -Seconds 1
     }
     return $errorCode
 }
@@ -156,7 +156,7 @@ try {
                     Write-Host ""  # Blank line
                 }
             }
-            Start-Sleep -Seconds 1  # Add a delay between requests to avoid rate limiting
+            # Start-Sleep -Seconds 1  # Adds a delay between requests to avoid rate limiting. Uncomment to re-enable.
         }
 
         # Export the results to a new CSV file
