@@ -1,4 +1,5 @@
 # Begin Talis Aspire link checking script
+
 # Function to check if a URL is broken or redirected to a domain
 function Test-Url {
     param (
@@ -50,7 +51,7 @@ function Test-Url {
         try {
             $response = Invoke-WebRequest -Uri $url -Method Head -TimeoutSec 90 -Headers @{"User-Agent"="Mozilla/5.0"} -MaximumRedirection 5 -ErrorAction Stop
 
-            # Handle redirections
+            # Handle redirections to a domain eg. if education.org/reports/ipads-in-education-blah-blah redirected to education.org
             if ($response.StatusCode -ge 300 -and $response.StatusCode -lt 400) {
                 $finalUrl = $response.Headers.Location
                 if ($finalUrl -match "^https?://[^/]+/?$") {
@@ -65,6 +66,7 @@ function Test-Url {
                 return $response.StatusCode
             } elseif ($response.StatusCode -eq 418) {
                 return "I'm a teapot"
+            # Check for 5XX range internal server errors
             } elseif ($response.StatusCode -ge 500 -and $response.StatusCode -lt 600) {
                 return "Server Error $($response.StatusCode)"
             }
@@ -176,5 +178,6 @@ try {
 
 # Keep the PowerShell window open
 Read-Host -Prompt "Press Enter to exit"
+
 # End QUT Readings link checking script
 
