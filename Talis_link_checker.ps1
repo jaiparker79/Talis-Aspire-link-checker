@@ -137,8 +137,8 @@ try {
             $lineCount++
             Write-Host "Processing line $lineCount"
 
-            # Check URLs in columns X and O
-            $columns = @("Web Address", "DOI")
+            # Check URLs in columns AL and O
+            $columns = @("Online Resource Web Address", "DOI")
             foreach ($column in $columns) {
                 $url = $row.$column
                 if ($url) {
