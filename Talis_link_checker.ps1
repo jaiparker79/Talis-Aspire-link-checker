@@ -42,8 +42,9 @@ function Test-Url {
     } elseif ($url -match "c=UERG") {
         return "Ebook Central PDF"
     }
-
-    $maxRetries = 2
+    
+    # Setting $maxRetries to 2 provides marginally better read of 404s but in the interests of efficiency it's set to 1 by default. Increase to 2 for marginally more accurate results however note this will take one second to check each link.  For 20 000 items that comes to an extra 5 1/2 hours, just for example. 
+    $maxRetries = 1
     $retryCount = 0
     $errorCode = $null
 
