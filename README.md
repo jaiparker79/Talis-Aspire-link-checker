@@ -39,14 +39,14 @@ broken. This can and should be customised for your specific needs.
 
 Otherwise, for every URL in the list, the script will flag it as broken if:
 
+* the webserver returns a 300 - 399 redirect response AND the URL redirected to is a domain. This test picks up where a deep link to a page or file redirects to the homepage of an organisation
+* the webserver returns a "400 Bad Request" response
+* the webserver returns a "404 Not Found" response
+* the webserver returns a 500 - 599 range server error response.
 * the hostname in the URL cannot be resolved (i.e. DNS error)
 * a connection timeout occurs (by default this is 90 seconds)
 * the connection terminates incorrectly
-* the webserver returns a "400 Bad Request" response
-* the webserver returns a "404 Not Found" response
-* the webserver returns a 500 - 599 range server error response
-* the webserver returns a 300 - 399 redirect response AND the URL redirected to is a domain. This test picks up where a deep link to a page or file redirects to the homepage of an organisation.
-
+* 
 Other error values (e.g. "401 Not authorised", "403 Forbidden") are _not_ flagged by this script.
 
 ### Output
