@@ -46,7 +46,7 @@ Otherwise, for every URL in the list, the script will flag it as broken if:
 * the hostname in the URL cannot be resolved (i.e. DNS error)
 * a connection timeout occurs (by default this is 90 seconds)
 * the connection terminates incorrectly
-* 
+
 Other error values (e.g. "401 Not authorised", "403 Forbidden") are _not_ flagged by this script.
 
 ### Output
