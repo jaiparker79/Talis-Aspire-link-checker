@@ -43,7 +43,7 @@ function Test-Url {
         return "Ebook Central PDF"
     } elseif ($url -match "^https://iview\.abc\.net\.au") {
         return "ABC iView, replace with copy from ClickView or EduTV"
-    } elseif ($url -match "^https://sbs\.com\.au/ondemand/") {
+    } elseif ($url -match "^https://www\.sbs\.com\.au/ondemand/") {
         return "SBS On Demand, replace with copy from ClickView or EduTV"
     } 
     
