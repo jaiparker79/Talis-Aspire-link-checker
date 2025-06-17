@@ -13,7 +13,9 @@ function Test-Url {
         return "https://www.library.qut.edu.au/search/status/linking/#other"
     } elseif ($url -match "^https://launch\.clickview\.net") {
         return "https://www.library.qut.edu.au/search/status/linking/#other"
-    } elseif ($url -match "^https://edu\.digitaltheatreplus\.com") {
+    }  elseif ($url -match "^https://online\.clickview\.com\.au") {
+        return "https://www.library.qut.edu.au/search/status/linking/#other"
+    }elseif ($url -match "^https://edu\.digitaltheatreplus\.com") {
         return "https://www.library.qut.edu.au/search/status/linking/digitaltheatre/"
     } elseif ($url -match "^https://learning\.oreilly\.com") {
         return "https://www.library.qut.edu.au/search/status/linking/oreilly/"
