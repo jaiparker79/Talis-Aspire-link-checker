@@ -37,7 +37,7 @@ and
 The script contains a hard-coded list of URL patterns that can be flagged as
 broken. This can and should be customised for your specific needs.
 
-The script also checks for a file named cancellations.xlsx and uses any value in column A or B to do a partial URL pattern check.  cancellations.xlsx is for items which have been cancelled and removed from the catalogue.  An example from Alma is included here with the Portfolio MMS ID in Column A and the ISBN from the Parser Parameters in Column B.
+The script also checks for a file named cancelled.xlsx and uses any value in column A or B to do a partial URL pattern check.  cancelled.xlsx is for items which have been cancelled and removed from the catalogue.  An example from Alma is included here with the Portfolio MMS ID in Column A and the ISBN from the Parser Parameters in Column B.
 
 Otherwise, for every URL in the list, the script will flag it as broken if:
 
