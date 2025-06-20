@@ -10,7 +10,7 @@ function Test-Url {
     # Check against cancelled items
     foreach ($cancelled in $cancelledItems) {
         if ($url -like "*$cancelled*") {
-            return "Cancelled ebook"
+            return "Cancelled item"
         }
     }
 
