@@ -3,19 +3,27 @@
 # Function to check if a URL is broken or redirected to a domain
 function Test-Url {
     param (
-        [string]$url
+        [string]$url,
+        [array]$cancelledItems
     )
 
-    # Check for specific URL patterns first. The ones listed below are QUT-specific, please edit these for your own libraries needs.
+    # Check against cancelled items
+    foreach ($cancelled in $cancelledItems) {
+        if ($url -like "*$cancelled*") {
+            return "Cancelled item"
+        }
+    }
+
+    # Check for specific URL patterns first
     if ($url -match "^https://web\.[a-z0-9]+\.ebscohost\.com") {
         return "https://www.library.qut.edu.au/search/status/linking/#other"
     } elseif ($url -match "^https://www\.clickview\.net/videos/") {
         return "https://www.library.qut.edu.au/search/status/linking/#other"
     } elseif ($url -match "^https://launch\.clickview\.net") {
         return "https://www.library.qut.edu.au/search/status/linking/#other"
-    }  elseif ($url -match "^https://online\.clickview\.com\.au") {
+    } elseif ($url -match "^https://online\.clickview\.com\.au") {
         return "https://www.library.qut.edu.au/search/status/linking/#other"
-    }elseif ($url -match "^https://edu\.digitaltheatreplus\.com") {
+    } elseif ($url -match "^https://edu\.digitaltheatreplus\.com") {
         return "https://www.library.qut.edu.au/search/status/linking/digitaltheatre/"
     } elseif ($url -match "^https://learning\.oreilly\.com") {
         return "https://www.library.qut.edu.au/search/status/linking/oreilly/"
@@ -47,9 +55,8 @@ function Test-Url {
         return "ABC iView, replace with copy from ClickView or EduTV"
     } elseif ($url -match "^https://www\.sbs\.com\.au/ondemand/") {
         return "SBS On Demand, replace with copy from ClickView or EduTV"
-    } 
-    
-    # Setting $maxRetries to 2 provides marginally better read of 404s but in the interests of efficiency it's set to 1 by default. Increase to 2 for marginally more accurate results however note this will take one second to check each link.  For 20 000 items that comes to an extra 5 1/2 hours, just for example. 
+    }
+
     $maxRetries = 1
     $retryCount = 0
     $errorCode = $null
@@ -57,23 +64,18 @@ function Test-Url {
     while ($retryCount -lt $maxRetries -and $errorCode -eq $null) {
         try {
             $response = Invoke-WebRequest -Uri $url -Method Head -TimeoutSec 90 -Headers @{"User-Agent"="Mozilla/5.0"} -MaximumRedirection 5 -ErrorAction Stop
-
-            # Handle redirections to a domain eg. if education.org/reports/ipads-in-education-blah-blah redirected to education.org
             if ($response.StatusCode -ge 300 -and $response.StatusCode -lt 400) {
                 $finalUrl = $response.Headers.Location
                 if ($finalUrl -match "^https?://[^/]+/?$") {
-                    return "$response.StatusCode - Redirected to domain"
+                    return "$($response.StatusCode) - Redirected to domain"
                 }
             }
-
-            # Check for 400 Bad request, 404 Not Found and to see if remote server is a teapot
             if ($response.StatusCode -eq 400) {
                 return $response.StatusCode
             } elseif ($response.StatusCode -eq 404) {
                 return $response.StatusCode
             } elseif ($response.StatusCode -eq 418) {
                 return "I'm a teapot"
-            # Check for 5XX range internal server errors
             } elseif ($response.StatusCode -ge 500 -and $response.StatusCode -lt 600) {
                 return "Server Error $($response.StatusCode)"
             }
@@ -107,61 +109,70 @@ function Show-Menu {
     for ($i = 0; $i -lt $files.Length; $i++) {
         Write-Host "$($i + 1). $($files[$i].Name)"
     }
-    Write-Host ""  # Blank line
+    Write-Host ""
     $selection = Read-Host "Enter the number of the file you want to check"
     return $files[$selection - 1]
 }
 
+# Load cancelled items from Excel
+$cancelledItems = @()
+if (Test-Path ".\\cancelled.xlsx") {
+    try {
+        $cancelledData = Import-Excel -Path ".\\cancelled.xlsx"
+        foreach ($row in $cancelledData) {
+            $cancelledItems += $row.PSObject.Properties.Value
+        }
+        $cancelledItems = $cancelledItems | Where-Object { $_ -ne $null -and $_ -ne "" }
+    } catch {
+        Write-Host "Error loading cancelled.xlsx: $($_.Exception.Message)" -ForegroundColor Red
+    }
+} else {
+    Write-Host "cancelled.xlsx not found in the current directory." -ForegroundColor Yellow
+}
+
 # Get list of CSV files
 $csvFiles = Get-ChildItem -Path . -Filter "all_list_items_*.csv"
-
 if ($csvFiles.Length -eq 0) {
     Write-Host "No CSV files found with the specified pattern." -ForegroundColor Red
     exit
 }
 
 Write-Host "###############################################" -ForegroundColor DarkYellow
-Write-Host "Talis Aspire link checking script (Version 1.0)" -ForegroundColor DarkYellow
+Write-Host "Talis Aspire link checking script (Version 1.1)" -ForegroundColor DarkYellow
 Write-Host "###############################################" -ForegroundColor DarkYellow
-Write-Host ""  # Blank line
+Write-Host ""
 
-# Show menu and get user selection
 $inputFilename = Show-Menu -files $csvFiles
 $outputFilename = "broken-links-$($inputFilename.BaseName).csv"
 
 try {
-    Write-Host ""  # Blank line
-    
     if ($inputFilename) {
-        Write-Host "Checking $($inputFilename.Name)" -ForegroundColor Magenta
-        Write-Host ""  # Blank line
+        Write-Host "`nChecking $($inputFilename.Name)" -ForegroundColor Magenta
         $csv = Import-Csv -Path $inputFilename.FullName
         $output = @()
-
         $lineCount = 0
+
         foreach ($row in $csv) {
             $lineCount++
             Write-Host "Processing line $lineCount"
-
-            # Check URLs in columns AL and O
             $columns = @("Online Resource Web Address", "DOI")
+
             foreach ($column in $columns) {
                 $url = $row.$column
                 if ($url) {
-                    # Prepend https://doi.org/ if the DOI value starts with 10.
                     if ($url -match "^10\..*") {
                         $url = "https://doi.org/$url"
                     }
                     Write-Host "Checking URL: $url"
-                    $errorCode = Test-Url -url $url
-                    if ($errorCode -and $errorCode -ne $null) {
+                    $errorCode = Test-Url -url $url -cancelledItems $cancelledItems
+                    if ($errorCode) {
                         Write-Host "Errant link detected: $url - Status Code: $errorCode" -ForegroundColor Red
                         $output += [pscustomobject]@{
-                            "Item Link"      = $row."Item Link"
+                            "Item Link"       = $row."Item Link"
                             "HTTP Error Code" = $errorCode
                             "Broken URL"      = $url
                         }
-                        Write-Host ""  # Blank line
+                        Write-Host ""
                         break
                     } else {
                         Write-Host "URL OK: $url" -ForegroundColor Green
@@ -187,4 +198,3 @@ try {
 Read-Host -Prompt "Press Enter to exit"
 
 # End QUT Readings link checking script
-
