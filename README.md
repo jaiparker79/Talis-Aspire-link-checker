@@ -37,6 +37,8 @@ and
 The script contains a hard-coded list of URL patterns that can be flagged as
 broken. This can and should be customised for your specific needs.
 
+The script also checks for a file named cancelled.xlsx and uses any value in column A or B to do a partial URL pattern check.  cancelled.xlsx is for items which have been cancelled and removed from the catalogue.  An example from Alma is included here with the Portfolio MMS ID in Column A and the ISBN from the Parser Parameters in Column B.
+
 Otherwise, for every URL in the list, the script will flag it as broken if:
 
 * the webserver returns a 300 - 399 redirect response AND the URL redirected to is a domain. This test picks up where a deep link to a page or file redirects to the homepage of an organisation
@@ -60,4 +62,3 @@ prepended to the filename. For example `broken-links-all_list_items_2025.csv`
 This report file contains two columns, "Item Link" for the readings link in
 question, and "HTTP Error Code" which is a brief description of what was
 wrong with it.
-
