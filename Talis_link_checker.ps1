@@ -71,7 +71,7 @@ function Test-Url {
         return "Bloomsbury, switch to OpenURL"
     }
 
-    $maxRetries = 1
+    $maxRetries = 1 #change maxRetries to 0 to skip HTTP error checking so this script only searches for URL pattern matches and cancelled items.
     $retryCount = 0
     $errorCode = $null
 
@@ -215,6 +215,7 @@ try {
 Read-Host -Prompt "Press Enter to exit"
 
 # End QUT Readings link checking script
+
 
 
 
