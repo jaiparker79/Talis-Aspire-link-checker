@@ -55,6 +55,20 @@ function Test-Url {
         return "ABC iView, replace with copy from ClickView or EduTV"
     } elseif ($url -match "^https://www\.sbs\.com\.au/ondemand/") {
         return "SBS On Demand, replace with copy from ClickView or EduTV"
+    } elseif ($url -match "bloomsburycollections\.com") {
+        return "Bloomsbury, switch to OpenURL"
+    } elseif ($url -match "bloomsburyfashoncentral\.com") {
+        return "Bloomsbury, switch to OpenURL"
+    } elseif ($url -match "bloomsburymusicandsound\.com") {
+        return "Bloomsbury, switch to OpenURL"
+    } elseif ($url -match "bloomsburyvideolibrary\.com") {
+        return "Bloomsbury, switch to OpenURL"
+    } elseif ($url -match "bloomsburyvisualarts\.com") {
+        return "Bloomsbury, switch to OpenURL"
+    } elseif ($url -match "dramaonlinelibrary\.com") {
+        return "Bloomsbury, switch to OpenURL"
+    } elseif ($url -match "screenstudies\.com") {
+        return "Bloomsbury, switch to OpenURL"
     }
 
     $maxRetries = 1
@@ -198,3 +212,4 @@ try {
 Read-Host -Prompt "Press Enter to exit"
 
 # End QUT Readings link checking script
+
