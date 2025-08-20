@@ -164,6 +164,7 @@ $outputFilename = "broken-links-$($inputFilename.BaseName).csv"
 try {
     if ($inputFilename) {
         Write-Host "`nChecking $($inputFilename.Name)" -ForegroundColor Magenta
+        Write-Host "" #Blank line
         $csv = Import-Csv -Path $inputFilename.FullName
         $output = @()
         $lineCount = 0
@@ -214,5 +215,6 @@ try {
 Read-Host -Prompt "Press Enter to exit"
 
 # End QUT Readings link checking script
+
 
 
