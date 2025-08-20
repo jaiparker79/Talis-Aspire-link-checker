@@ -141,7 +141,9 @@ if (Test-Path ".\\cancelled.xlsx") {
         Write-Host "Error loading cancelled.xlsx: $($_.Exception.Message)" -ForegroundColor Red
     }
 } else {
+    Write-Host "" # Blank line
     Write-Host "cancelled.xlsx not found in the current directory." -ForegroundColor Yellow
+    Write-Host "" # Blank line
 }
 
 # Get list of CSV files
@@ -212,4 +214,5 @@ try {
 Read-Host -Prompt "Press Enter to exit"
 
 # End QUT Readings link checking script
+
 
