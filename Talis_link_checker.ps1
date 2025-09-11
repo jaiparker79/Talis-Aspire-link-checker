@@ -39,6 +39,8 @@ function Test-Url {
         return "Ovid. Check metadata has valid DOI and switch linking to OpenURL"
     } elseif ($url -match "^https://global-factiva-com\.eu1\.proxy\.openathens\.net") {
         return "https://www.library.qut.edu.au/search/status/linking/factiva/"
+    } elseif ($url -match "^https://dj-factiva-com\.eu1\.proxy\.openathens\.net") {
+        return "https://www.library.qut.edu.au/search/status/linking/factiva/"
     } elseif ($url -match "^https://qut\.eblib\.com") {
         return "EBL. Change URL to ProQuest Ebook Central"
     } elseif ($url -match "^https://qut\.eblib\.com\.au") {
@@ -233,4 +235,5 @@ try {
 Read-Host -Prompt "Press Enter to exit"
 
 # End QUT Readings link checking script
+
 
