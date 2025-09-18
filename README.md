@@ -5,8 +5,6 @@ Talis Aspire Reading List system.  It was made by Jai Parker, Information
 Access Librarian at the Queensland University of Technology with help from
 Microsoft Copilot.  As per the [license](./LICENSE), caveat emptor.
 
-To automated the search for cancelled items the script uses the ImportExcel PowerShell module.  To install this run PowerShell as Administrator and enter `Install-Module -Name ImportExcel -Scope CurrentUser`
-
 To run this script:
 
 1. Download a csv of items for checking from Talis. The CSV file name format
@@ -35,14 +33,10 @@ and
 
 * `Item Link` -- the link in your readings that points to the URL
 
-The script loads the MMS IDs of Portfolios which have been deleted from Alma in the file cancelled.xlsx and identifies them in the Online Resource Web Address field.
-
 ### Errors
 
 The script contains a hard-coded list of URL patterns that can be flagged as
 broken. This can and should be customised for your specific needs.
-
-The script also checks for a file named cancelled.xlsx and uses any value in column A or B to do a partial URL pattern check.  cancelled.xlsx is for items which have been cancelled and removed from the catalogue.  An example from Alma is included here with the Portfolio MMS ID in Column A and the ISBN from the Parser Parameters in Column B.
 
 Otherwise, for every URL in the list, the script will flag it as broken if:
 
