@@ -13,7 +13,6 @@ To run this script:
    automatically prepends https://doi.org/ to anything starting with 10. in
    this field so all the duplicated DOIs, mostly delimited by a ; need to be
    removed first.
-3. If you are running a search for links of cancelled Alma items add a file named cancelled.xlsx containing the direct export of the Alma Portfolios which have been deleted from the catalogue.
 
 ### Input
 
