@@ -166,8 +166,8 @@ $maxRetries = 1  # Default to full link checking
 
 Write-Host ""
 Write-Host "Select link checking mode:"
-Write-Host "A. Start of semester full link checking"
-Write-Host "B. Roster 3 URL pattern and cancelled item checking"
+Write-Host "A. Full link and DOI checking"
+Write-Host "B. URL pattern and cancelled item checking only"
 Write-Host ""
 $modeSelection = Read-Host "Enter your choice (A or B)"
 if ($modeSelection -eq 'B') {
@@ -235,5 +235,6 @@ try {
 Read-Host -Prompt "Press Enter to exit"
 
 # End QUT Readings link checking script
+
 
 
