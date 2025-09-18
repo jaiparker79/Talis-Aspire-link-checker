@@ -3,16 +3,8 @@
 # Function to check if a URL is broken or redirected to a domain
 function Test-Url {
     param (
-        [string]$url,
-        [array]$cancelledItems
+        [string]$url
     )
-
-    # Check against cancelled items
-    foreach ($cancelled in $cancelledItems) {
-        if ($url -like "*$cancelled*") {
-            return "Cancelled item"
-        }
-    }
 
     # Check for specific URL patterns first
     if ($url -match "^https://web\.[a-z0-9]+\.ebscohost\.com") {
@@ -130,24 +122,6 @@ function Show-Menu {
     return $files[$selection - 1]
 }
 
-# Load cancelled items from Excel
-$cancelledItems = @()
-if (Test-Path ".\\cancelled.xlsx") {
-    try {
-        $cancelledData = Import-Excel -Path ".\\cancelled.xlsx"
-        foreach ($row in $cancelledData) {
-            $cancelledItems += $row.PSObject.Properties.Value
-        }
-        $cancelledItems = $cancelledItems | Where-Object { $_ -ne $null -and $_ -ne "" }
-    } catch {
-        Write-Host "Error loading cancelled.xlsx: $($_.Exception.Message)" -ForegroundColor Red
-    }
-} else {
-    Write-Host "" # Blank line
-    Write-Host "cancelled.xlsx not found in the current directory." -ForegroundColor Yellow
-    Write-Host "" # Blank line
-}
-
 # Get list of CSV files
 $csvFiles = Get-ChildItem -Path . -Filter "all_list_items_*.csv"
 if ($csvFiles.Length -eq 0) {
@@ -157,7 +131,7 @@ if ($csvFiles.Length -eq 0) {
 
 Write-Host ""
 Write-Host "###############################################" -ForegroundColor DarkYellow
-Write-Host "Talis Aspire link checking script (Version 1.2)" -ForegroundColor DarkYellow
+Write-Host "Talis Aspire link checking script (Version 1.3)" -ForegroundColor DarkYellow
 Write-Host "###############################################" -ForegroundColor DarkYellow
 Write-Host ""
 
@@ -166,8 +140,8 @@ $maxRetries = 1  # Default to full link checking
 
 Write-Host ""
 Write-Host "Select link checking mode:"
-Write-Host "A. Full link and DOI checking"
-Write-Host "B. URL pattern and cancelled item checking only"
+Write-Host "A. Complete link and DOI checking"
+Write-Host "B. URL pattern checking only"
 Write-Host ""
 $modeSelection = Read-Host "Enter your choice (A or B)"
 if ($modeSelection -eq 'B') {
@@ -235,6 +209,7 @@ try {
 Read-Host -Prompt "Press Enter to exit"
 
 # End QUT Readings link checking script
+
 
 
 
