@@ -156,9 +156,9 @@ if ($csvFiles.Length -eq 0) {
 }
 
 Write-Host ""
-Write-Host "###############################################" -ForegroundColor DarkYellow
-Write-Host "Talis Aspire link checking script (Version 1.2)" -ForegroundColor DarkYellow
-Write-Host "###############################################" -ForegroundColor DarkYellow
+Write-Host "##########################################################################" -ForegroundColor DarkYellow
+Write-Host "Talis Aspire link checking script with cancellation checking (Version 1.2)" -ForegroundColor DarkYellow
+Write-Host "##########################################################################" -ForegroundColor DarkYellow
 Write-Host ""
 
 $inputFilename = Show-Menu -files $csvFiles
@@ -235,6 +235,7 @@ try {
 Read-Host -Prompt "Press Enter to exit"
 
 # End QUT Readings link checking script
+
 
 
 
