@@ -140,7 +140,7 @@ $maxRetries = 1  # Default to full link checking
 
 Write-Host ""
 Write-Host "Select link checking mode:"
-Write-Host "A. Complete link and DOI checking"
+Write-Host "A. Complete URL and DOI checking"
 Write-Host "B. URL pattern checking only"
 Write-Host ""
 $modeSelection = Read-Host "Enter your choice (A or B)"
@@ -210,6 +210,7 @@ Write-Host ""
 Read-Host -Prompt "Press Enter to exit"
 
 # End QUT Readings link checking script
+
 
 
 
