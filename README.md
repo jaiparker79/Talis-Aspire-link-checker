@@ -12,7 +12,7 @@ To run this script:
 2. Open the CSV file and do a cleanup of the DOIs in Column O. The script
    automatically prepends https://doi.org/ to anything starting with 10. in
    this field so all the duplicated DOIs, mostly delimited by a ; need to be
-   removed first.
+   removed first. **Note:** This step is not required if only running the URL pattern check.
 
 ### Input
 
