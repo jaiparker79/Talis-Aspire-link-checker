@@ -206,9 +206,11 @@ try {
 }
 
 # Keep the PowerShell window open
+Write-Host ""
 Read-Host -Prompt "Press Enter to exit"
 
 # End QUT Readings link checking script
+
 
 
 
