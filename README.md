@@ -14,7 +14,7 @@ To set the Execution Policy:
 1. Click the Windows start button and search for "Windows PowerShell" then select **Run as administrator**
 2. Type `Set-ExecutionPolicy -ExecutionPolicy Unrestricted -Scope CurrentUser` and press Enter
 3. When asked "Do you want to change the execution policy?" press Y
-4. Type `Install-Module -Name ImportExcel -Scope CurrentUser' and press Enter
+4. Type `Install-Module -Name ImportExcel -Scope CurrentUser` and press Enter
 5. Follow any prompts to authorise installation of a 3rd party/non-Microsoft cmdlet
 
 ## Running the script
