@@ -27,7 +27,7 @@ To run this script:
    this field so all the duplicated DOIs, mostly delimited by a ; need to be
    removed first. **Note:** This step is not required if only running the URL pattern check.
 3. If you are running a search for links of cancelled Alma items add a file named cancelled.xlsx containing the direct export of the Alma Portfolios which have been deleted from the catalogue.
- **Note:** the cancelled items checking works because MMS IDs are included in Primo Permalinks eg. https://qut.primo.exlibrisgroup.com/permalink/61QUT_INST/1g7tbfa/alma**991010993492104001**
+ **Note:** the cancelled items checking works because MMS IDs are included in Primo Permalinks eg. qut.primo.exlibrisgroup.com/permalink/61QUT_INST/1g7tbfa/alma**991010993492104001**
 4. Rename the file cancelled.xlsx and save it to the same folder as all_list_items_*.csv
 
 ### Input
