@@ -5,6 +5,19 @@ Talis Aspire Reading List system.  It was made by Jai Parker, Information
 Access Librarian at the Queensland University of Technology with help from
 Microsoft Copilot.  As per the [license](./LICENSE), caveat emptor.
 
+## Prerequisites
+PowerShell requires: 
+1. an execution policy set to run this script and
+2. installation of the Import Excel cmdlet to perform the cancelled item checking.
+
+To set the Execution Policy:
+1. Click the Windows start button and search for "Windows PowerShell" then select **Run as administrator**
+2. Type `Set-ExecutionPolicy -ExecutionPolicy Unrestricted -Scope CurrentUser` and press Enter
+3. When asked "Do you want to change the execution policy?" press Y
+4. Type `Install-Module -Name ImportExcel -Scope CurrentUser' and press Enter
+5. Follow any prompts to authorise installation of a 3rd party/non-Microsoft cmdlet
+
+## Running the script
 To run this script:
 
 1. Download a csv of items for checking from Talis. The CSV file name format
@@ -13,6 +26,9 @@ To run this script:
    automatically prepends https://doi.org/ to anything starting with 10. in
    this field so all the duplicated DOIs, mostly delimited by a ; need to be
    removed first. **Note:** This step is not required if only running the URL pattern check.
+3. If you are running a search for links of cancelled Alma items add a file named cancelled.xlsx containing the direct export of the Alma Portfolios which have been deleted from the catalogue.
+ **Note:** the cancelled items checking works because MMS IDs are included in Primo Permalinks eg. https://qut.primo.exlibrisgroup.com/permalink/61QUT_INST/1g7tbfa/alma**991010993492104001**
+4. Rename the file cancelled.xlsx and save it to the same folder as all_list_items_*.csv
 
 ### Input
 
@@ -32,10 +48,14 @@ and
 
 * `Item Link` -- the link in your readings that points to the URL
 
+The script loads the MMS IDs of Portfolios which have been deleted from Alma in the file cancelled.xlsx and identifies them in the Online Resource Web Address field.
+
 ### Errors
 
 The script contains a hard-coded list of URL patterns that can be flagged as
 broken. This can and should be customised for your specific needs.
+
+The script also checks for a file named cancelled.xlsx and uses any value in column A or B to do a partial URL pattern check. cancelled.xlsx is for items which have been cancelled and removed from the catalogue. An example from Alma is included here with the Portfolio MMS ID in Column A and the ISBN from the Parser Parameters in Column B.
 
 Otherwise, for every URL in the list, the script will flag it as broken if:
 
