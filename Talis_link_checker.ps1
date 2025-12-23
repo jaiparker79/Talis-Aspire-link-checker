@@ -71,6 +71,8 @@ function Test-Url {
         return "Bloomsbury, switch to OpenURL"
     } elseif ($url -match "screenstudies\.com") {
         return "Bloomsbury, switch to OpenURL"
+    } elseif ($url -match "storyboxhub\.com/stories.*") {
+        return "https://www.library.qut.edu.au/search/status/linking/storyboxhub/"
     }
 
 # $maxRetries is now set based on user selection below
@@ -235,3 +237,4 @@ try {
 Read-Host -Prompt "Press Enter to exit"
 
 # End QUT Readings link checking script
+
