@@ -210,7 +210,7 @@ try {
                             "Item Link"       = $row."Item Link"
                             "List Appearance" = $row."List Appearance"
                             "List Link"       = $row."List Link"
-                            "HTTP Error Code" = $errorCode
+                            "Error message/instructions" = $errorCode
                             "Broken URL"      = $url
                         }
                         Write-Host ""
@@ -239,6 +239,7 @@ try {
 Read-Host -Prompt "Press Enter to exit"
 
 # End QUT Readings link checking script
+
 
 
 
