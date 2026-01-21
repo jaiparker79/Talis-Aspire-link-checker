@@ -208,6 +208,8 @@ try {
                         Write-Host "Errant link detected: $url - Status Code: $errorCode" -ForegroundColor Red
                         $output += [pscustomobject]@{
                             "Item Link"       = $row."Item Link"
+                            "List Appearance" = $row."List Appearance"
+                            "List Link"       = $row."List Link"
                             "HTTP Error Code" = $errorCode
                             "Broken URL"      = $url
                         }
@@ -237,5 +239,6 @@ try {
 Read-Host -Prompt "Press Enter to exit"
 
 # End QUT Readings link checking script
+
 
 
