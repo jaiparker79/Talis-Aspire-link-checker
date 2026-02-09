@@ -210,6 +210,7 @@ try {
                             "Item Link"       = $row."Item Link"
                             "List Appearance" = $row."List Appearance"
                             "List Link"       = $row."List Link"
+                            "Library Note"    = $row."Library Note"
                             "Error message/instructions" = $errorCode
                             "Broken URL"      = $url
                         }
@@ -239,6 +240,7 @@ try {
 Read-Host -Prompt "Press Enter to exit"
 
 # End QUT Readings link checking script
+
 
 
 
