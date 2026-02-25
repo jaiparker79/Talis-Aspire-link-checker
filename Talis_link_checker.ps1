@@ -194,7 +194,7 @@ try {
         foreach ($row in $csv) {
             $lineCount++
             Write-Host "Processing line $lineCount"
-            $columns = @("Online Resource Web Address", "DOI")
+            $columns = @("Online Resource Web Address")
 
             foreach ($column in $columns) {
                 $url = $row.$column
@@ -240,6 +240,7 @@ try {
 Read-Host -Prompt "Press Enter to exit"
 
 # End QUT Readings link checking script
+
 
 
 
