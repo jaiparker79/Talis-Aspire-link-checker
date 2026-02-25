@@ -27,8 +27,6 @@ function Test-Url {
         return "https://www.library.qut.edu.au/search/status/linking/digitaltheatre/"
     } elseif ($url -match "^https://learning\.oreilly\.com") {
         return "https://www.library.qut.edu.au/search/status/linking/oreilly/"
-    } elseif ($url -match "^https://viewer\.books24x7\.com") {
-        return "https://www.library.qut.edu.au/search/status/linking/skillsoft/"
     } elseif ($url -match "^https://anzlaw\.thomsonreuters\.com") {
         return "https://www.library.qut.edu.au/search/status/linking/westlaw/"
     } elseif ($url -match "^https://1\.next\.westlaw\.com") {
@@ -240,6 +238,7 @@ try {
 Read-Host -Prompt "Press Enter to exit"
 
 # End QUT Readings link checking script
+
 
 
 
