@@ -205,12 +205,15 @@ try {
                     if ($errorCode) {
                         Write-Host "Errant link detected: $url - Status Code: $errorCode" -ForegroundColor Red
                         $output += [pscustomobject]@{
-                            "Item Link"       = $row."Item Link"
-                            "List Appearance" = $row."List Appearance"
-                            "List Link"       = $row."List Link"
-                            "Library Note"    = $row."Library Note"
-                            "Error message/instructions" = $errorCode
-                            "Broken URL"      = $url
+                            "Title"                       = $row."Title"
+                            "Chapter/Article Title"       = $row."Chapter/Article Title"
+                            "Item Link"                   = $row."Item Link"
+                            "List Appearance"             = $row."List Appearance"
+                            "Time Period"                 = $row."Time Period"
+                            "List Link"                   = $row."List Link"
+                            "Library Note"                = $row."Library Note"
+                            "Error message/instructions"  = $errorCode
+                            "Broken URL"                  = $url
                         }
                         Write-Host ""
                         break
@@ -238,6 +241,7 @@ try {
 Read-Host -Prompt "Press Enter to exit"
 
 # End QUT Readings link checking script
+
 
 
 
