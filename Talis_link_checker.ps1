@@ -101,10 +101,8 @@ function Test-Url {
                 return "301 - Redirected to domain"
             }
 
-            # ----- STEP 2: 400, 404, 418, 500 -----
-            if ($response.StatusCode -eq 400) {
-                return $response.StatusCode
-            } elseif ($response.StatusCode -eq 404) {
+            # ----- STEP 2: 404, 405, 500 -----
+            if ($response.StatusCode -eq 404) {
                 return $response.StatusCode
             } elseif ($response.StatusCode -eq 405) {
                 return $response.StatusCode
