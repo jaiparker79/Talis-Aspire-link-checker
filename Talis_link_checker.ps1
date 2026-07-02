@@ -128,10 +128,8 @@ function Test-Url {
                 }
                 # 301 to a specific path, not a bare domain - not flagged per Step 1.
             }
-            # ----- STEP 2: 400, 404, 418, 500 -----
-            elseif ($statusCode -eq 400) {
-                return $statusCode
-            } elseif ($statusCode -eq 404) {
+            # ----- STEP 2: 404, 405, 500 -----
+            elseif ($statusCode -eq 404) {
                 return $statusCode
             } elseif ($statusCode -eq 405) {
                 return $statusCode
