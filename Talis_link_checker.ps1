@@ -72,7 +72,11 @@ function Test-Url {
         return "Bloomsbury, switch to OpenURL"
     } elseif ($url -match "storyboxhub\.com/stories.*") {
         return "https://www.library.qut.edu.au/search/status/linking/storyboxhub/"
-    }
+    } elseif ($url -match '^https://au\.i2\.saiglobal\.com/management/') {
+		return "https://www.library.qut.edu.au/search/status/linking/#other"
+	} elseif ($url -match '^https://i2\.saiglobal\.com/management/') {
+		return "https://www.library.qut.edu.au/search/status/linking/#other"
+	}
 
     # $maxRetries is now set based on user selection below
     $retryCount = 0
@@ -199,7 +203,7 @@ if ($csvFiles.Length -eq 0) {
 
 Write-Host ""
 Write-Host "##########################################################################" -ForegroundColor DarkYellow
-Write-Host "Talis Aspire link checking script with cancellation checking (Version 1.3)" -ForegroundColor DarkYellow
+Write-Host "Talis Aspire link checking script with cancellation checking (Version 1.4)" -ForegroundColor DarkYellow
 Write-Host "##########################################################################" -ForegroundColor DarkYellow
 Write-Host ""
 
