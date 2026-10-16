@@ -35,7 +35,7 @@ function Test-Url {
     } elseif ($url -match "^https://ovidsp\.[a-z0-9]+\.ovid\.com") {
         return "Ovid. Check metadata has valid DOI and switch linking to OpenURL"
     } elseif ($url -match "^https://global-factiva-com\.eu1\.proxy\.openathens\.net") {
-        return "https://www.library.qut.edu.au/search/status/linking/factiva/"
+        return "https://libguides.library.qut.edu.au/databases/linking/factiva"
     } elseif ($url -match "^https://dj-factiva-com\.eu1\.proxy\.openathens\.net") {
         return "https://libguides.library.qut.edu.au/databases/linking/factiva"
     } elseif ($url -match "^https://qut\.eblib\.com") {
@@ -69,7 +69,7 @@ function Test-Url {
     } elseif ($url -match "screenstudies\.com") {
         return "Bloomsbury, switch to OpenURL"
     } elseif ($url -match "storyboxhub\.com/stories.*") {
-        return "https://www.library.qut.edu.au/search/status/linking/storyboxhub/"
+        return "https://libguides.library.qut.edu.au/databases/linking/storybox"
     } elseif ($url -match '^https://au\.i2\.saiglobal\.com/management/') {
 		return "https://libguides.library.qut.edu.au/databases/linking/interteki2i"
 	} elseif ($url -match '^https://i2\.saiglobal\.com/management/') {
